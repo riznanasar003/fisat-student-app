@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import NavBar from './NavBar'
+import axios from 'axios'
 
 const AddStudent = () => {
     const [data,setData] = useState(
         {
-            "fname":"",
-            "lname":"",
+            "firstname":"",
+            "lastname":"",
             "college":"",
             "dob":"",
             "course":"",
-            "mobileno":"",
-            "emailid":"",
-            "parentname":"",
+            "mobile":"",
+            "email":"",
             "address":""
         }
     )
@@ -20,6 +20,19 @@ const AddStudent = () => {
         }
         const readValue = () =>{
             console.log(data)
+
+            axios.post("https://courseapplogix.onrender.com/addstudents",data).then(
+                (response)=>{
+                    console.log(response.data)
+                    if (response.data.status=="success") {
+                        alert("Successfully Added")
+                        
+                    } else {
+                        alert("Error")
+                        
+                    }
+                }
+            ).catch().finally()
         }
 
     return (
@@ -33,16 +46,16 @@ const AddStudent = () => {
                             <div className="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
 
                                 <label htmlFor="" className="fomr-label">FIRST NAME</label>
-                                <input type="text" className="form-control" name='fname' value={data.fname} onChange={inputHandler}/>
+                                <input type="text" className="form-control" name='firstname' value={data.firstname} onChange={inputHandler}/>
 
                             </div>
                             <div className="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
 
                                 <label htmlFor="" className="form-label">LAST NAME</label>
-                                <input type="text" className="form-control" name="lname" value={data.lname} onChange={inputHandler}/>
+                                <input type="text" className="form-control" name="lastname" value={data.lastname} onChange={inputHandler}/>
 
                             </div>
-                            <div className="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                            <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 ">
 
                                 <label htmlFor="" className="form-label">COLLEGE</label>
                                 <input type="text" className="form-control" name='college' value={data.college} onChange={inputHandler}/>
@@ -58,6 +71,7 @@ const AddStudent = () => {
 
                                 <label htmlFor="" className="form-label">COURSE</label>
                                 <select name="course" value={data.course} onChange={inputHandler} id="" className="form-control">
+                                    <option value="select...">select...</option>
                                     <option value="MCA">MCA</option>
                                     <option value="MBA">MBA</option>
                                     <option value="MTECH">MTECH</option>
@@ -72,22 +86,16 @@ const AddStudent = () => {
                             <div className="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
 
                                 <label htmlFor="" className="form-label">MOBILE NO</label>
-                                <input type="text" className="form-control" name='mobileno' value={data.mobileno} onChange={inputHandler}/>
+                                <input type="text" className="form-control" name='mobile' value={data.mobile} onChange={inputHandler}/>
 
                             </div>
                             <div className="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
 
                                 <label htmlFor="" className="form-label">EMAIL ID</label>
-                                <input type="text" className="form-control" name='emailid' value={data.emailid} onChange={inputHandler}/>
+                                <input type="text" className="form-control" name='email' value={data.email} onChange={inputHandler}/>
 
                             </div>
 
-                            <div className="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
-
-                                <label htmlFor="" className="form-label">PARENT NAME</label>
-                                <input type="text" className="form-control" name='parentname' value={data.parentname} onChange={inputHandler}/>
-
-                            </div>
 
                             <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
 
